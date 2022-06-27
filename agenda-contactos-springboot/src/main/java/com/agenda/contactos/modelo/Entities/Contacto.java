@@ -34,14 +34,19 @@ public class Contacto implements Serializable {
 	@Column(name = "nombre")
 	private String nombre;
 
-	@NotEmpty(message = "Debe ingresar su email")
-	@Email
-	@Column(name = "email")
-	private String email;
 
 	@NotBlank(message = "Debe ingresar su celular")
 	@Column(name = "celular")
 	private String celular;
+
+	public Contacto(@NotBlank(message = "Debe ingresar su nombre") String nombre,
+			@NotBlank(message = "Debe ingresar su celular") String celular) {
+		this.nombre = nombre;
+		this.celular = celular;
+	}
+
+	public Contacto() {
+	}
 
 	public Integer getId() {
 		return id;
@@ -59,13 +64,6 @@ public class Contacto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public String getCelular() {
 		return celular;

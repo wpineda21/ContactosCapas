@@ -8,10 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.agenda.contactos.Services.ContactoService;
+import com.agenda.contactos.modelo.DTOS.ContactoDTO;
 import com.agenda.contactos.modelo.Entities.Contacto;
 import com.agenda.contactos.repositorio.ContactoRepositorio;
 
@@ -20,7 +23,10 @@ public class ContactoControlador {
 
 	@Autowired
 	private ContactoRepositorio contactoRepositorio;
-	
+
+	@Autowired
+	private ContactoService contactoService;
+
 	@GetMapping({"/",""})
 	public String verPaginaDeInicio(Model modelo) {
 		List<Contacto> contactos = contactoRepositorio.findAll();
@@ -28,25 +34,30 @@ public class ContactoControlador {
 		return "index";
 	}
 	
+	@ModelAttribute("contacto")
+	public ContactoDTO retornarNuevoUsuarioRegistroDTO() {
+		return new ContactoDTO();
+	}
+
 	@GetMapping("/nuevo")
 	public String mostrarFormularioDeRegistrarContacto(Model modelo) {
-		modelo.addAttribute("contacto", new Contacto());
+		modelo.addAttribute("contacto", new ContactoDTO());
 		return "nuevo";
 	}
-	
+
 	@PostMapping("/nuevo")
-	public String guardarContacto(@Validated Contacto contacto,BindingResult bindingResult,RedirectAttributes redirect,Model modelo) {
+	public String guardarContacto(@Validated ContactoDTO contactoDTO,BindingResult bindingResult,RedirectAttributes redirect,Model modelo) {
 		if(bindingResult.hasErrors()) {
-			modelo.addAttribute("contacto", contacto);
+			modelo.addAttribute("contacto", contactoDTO);
 			return "nuevo";
 		}
 		
-		contactoRepositorio.save(contacto);
+		contactoService.guardarContacto(contactoDTO);
 		redirect.addFlashAttribute("msgExito", "El contacto ha sido agregado con exito");
 		return "redirect:/";
 	}
-	
 
+	
 	@GetMapping("/{id}/editar")
 	public String mostrarFormularioDeEditarContacto(@PathVariable Integer id,Model modelo) {
 		Contacto contacto = contactoRepositorio.getById(id);
@@ -55,20 +66,12 @@ public class ContactoControlador {
 	}
 	
 	@PostMapping("/{id}/editar")
-	public String actualizarContacto(@PathVariable Integer id,@Validated Contacto contacto,BindingResult bindingResult,RedirectAttributes redirect,Model modelo) {
-		Contacto contactoDB = contactoRepositorio.getById(id);
+	public String actualizarContacto(@PathVariable Integer id,@Validated ContactoDTO contactoDTO,BindingResult bindingResult,RedirectAttributes redirect,Model modelo) {
 		if(bindingResult.hasErrors()) {
-			modelo.addAttribute("contacto", contacto);
+			modelo.addAttribute("contacto", contactoDTO);
 			return "nuevo";
 		}
-		
-		contactoDB.setNombre(contacto.getNombre());
-		contactoDB.setCelular(contacto.getCelular());
-		contactoDB.setEmail(contacto.getEmail());
-
-		
-		
-		contactoRepositorio.save(contactoDB);
+		contactoService.EditarContacto(id, contactoDTO);
 		redirect.addFlashAttribute("msgExito", "El contacto ha sido actualizado correctamente");
 		return "redirect:/";
 	}

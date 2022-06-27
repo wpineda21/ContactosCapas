@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="google-signin-client_id"
+      content="YOUR_CLIENT_ID.apps.googleusercontent.com"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medication Hours</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+  <script src="https://kit.fontawesome.com/0a84f4d644.js" crossorigin="anonymous"></script>
+  
+    <script src="/public/JS/gettertime.js"></script>
+   	<script src="/public/JS/navbarcomponent.js"></script>
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="stylesheet" href="/public/css/main.css" />
+    <link rel="stylesheet" href="/public/css/takeMedications.css" />
+    
+  </head>
+
+
+  <body class="BackG-SingUpColor">
+   <app-navbar></app-navbar>
+    <!--Parte texto Perfil y la hora-->
+  <div class="container-fluid">
+        <div class="row">
+        <div class="col-4">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMedicineModal">Add Medicine</button>
+          </div>
+          
+    <!--Parte dentro del modal-->
+    
+    	<div class="modal fade" id=addMedicineModal>
+    		<div class="modal-dialog modal-dialog-centered">
+    			<div class="modal-content">
+    			
+    			<div class="modal-header">
+    			
+    			<h5 class="modal-tittle">Create a new reminder</h5>
+    			<button class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+    			</div>
+    			
+    			<div class="modal-body">
+    				<div class="form-outline mb-4 text-white">
+                    	<label style="color:black" for="addmedicationtext">Medication name: </label>
+                    	<input type="text" id="medicinename-to-add" class="input" maxlength="50" placeholder="Medication name" required>
+                    </div>
+                    <div class="form-outline mb-4 text-white">
+                    	<label style="color:black" for="timepickertext" >Hour for taking:</label>
+      					<input type="time" id="medicinetime-to-add" class="form-control" value="10:10 AM" required>
+                    </div>
+    			</div>
+    			
+    			<div class="modal-footer">
+    			<button class="btn btn-success" data-bs-dismiss="modal" type="submit">Add reminder</button>
+    			</div>
+    			
+    			</div>
+    		</div>
+    	</div>
+    <!--Parte muestra de medicamento-->
+          <div class="col text-center">
+            <h1>Hours for taking medications</h1>
+          </div>  
+          <div class="col-4">
+            <div id="irlTime">
+                00 : 00 : 00
+               </div>
+                 
+            </div>
+        </div>
+    
+    <!--Parte Tablas-->    
+   <div class="rectangle1">
+    <div class="row me-1">
+    	
+    	<!--Card to generate--> 
+    	<div id="medWarnChangeCard" class="card border border-secondary">
+    		<div class="card-body">
+    			<div class="row" >
+    				<div class="col">
+    					<h4 class="card-tittle">Medicine: </h4>
+    					<p class="card-text">Name.medicine</p>
+    				</div>
+    				<div class="col">
+    					<h4 class="card-tittle">Time: </h4>
+    					<p class="card-text">00:00 AMPM</p>
+    				</div>
+    				<div class="col align-self-center">
+  								<button type="button" class="btn btn-danger me-5">Delete</button>
+  								<input type="checkbox" class="btn-check me-5" id="btn-medicineCheck" autocomplete="off">
+								<label class="btn btn-outline-success" for="btn-medicineCheck">Consumed</label><br>
+    				</div>
+    			</div>
+    		</div>	
+    	</div>
+    	
+    	
+    	
+    	
+    </div>
+  </div>
+  <script src="/public/JS/changeColor.js"></script>
+  </body>
+  
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+  crossorigin="anonymous"
+  ></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+  integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+  crossorigin="anonymous"
+  ></script>
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+  integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+  crossorigin="anonymous"
+  ></script>
+  
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+</html>
