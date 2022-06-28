@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.agenda.contactos.Services.ContactoService;
@@ -27,13 +29,25 @@ public class ContactoControlador {
 	@Autowired
 	private ContactoService contactoService;
 
-	@GetMapping({"/",""})
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String getTakeMedications(Model model) {
+		return "Medicamentos";
+	}
+
+	@GetMapping("/Medicamentos")
 	public String verPaginaDeInicio(Model modelo) {
 		List<Contacto> contactos = contactoRepositorio.findAll();
-		modelo.addAttribute("contactos", contactos);
-		return "index";
+		modelo.addAttribute("contacto", contactos);
+		return "Medicamentos";
 	}
-	
+
+	@GetMapping("/TakeMedications")
+	public String verPaginaDeInicio2(Model modelo) {
+		List<Contacto> contactos = contactoRepositorio.findAll();
+		modelo.addAttribute("contacto", contactos);
+		return "TakeMedications";
+	}
+
 	@ModelAttribute("contacto")
 	public ContactoDTO retornarNuevoUsuarioRegistroDTO() {
 		return new ContactoDTO();
@@ -54,7 +68,7 @@ public class ContactoControlador {
 		
 		contactoService.guardarContacto(contactoDTO);
 		redirect.addFlashAttribute("msgExito", "El contacto ha sido agregado con exito");
-		return "redirect:/";
+		return "redirect:/Medicamentos";
 	}
 
 	
@@ -73,7 +87,7 @@ public class ContactoControlador {
 		}
 		contactoService.EditarContacto(id, contactoDTO);
 		redirect.addFlashAttribute("msgExito", "El contacto ha sido actualizado correctamente");
-		return "redirect:/";
+		return "redirect:/Medicamentos";
 	}
 	
 	@PostMapping("/{id}/eliminar")
@@ -81,6 +95,6 @@ public class ContactoControlador {
 		Contacto contacto = contactoRepositorio.getById(id);
 		contactoRepositorio.delete(contacto);
 		redirect.addFlashAttribute("msgExito", "El contacto ha sido eliminado correctamente");
-		return "redirect:/";
+		return "redirect:/Medicamentos";
 	}
 }

@@ -50,23 +50,18 @@
 			<button type="button" class="btn btn-close" data-bs-dismiss="alert"></button>
 		</div>
         <div class="row">
-        <div class="col-4">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMedicineModal">Add Medicine</button>
-          </div>
-          
-    <!--Parte dentro del modal-->
-    
     	<div class="modal fade" id=addMedicineModal>
     		<div class="modal-dialog modal-dialog-centered">
     			<div class="modal-content">
     			
     			<div class="modal-header">
     			
-    			<h5 class="modal-tittle">Create a new reminder</h5>
-    			<button class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+    			<h5 class="modal-tittle">¿Añadir un medicamento?</h5>
+    			<button class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+          <a href="../nuevo" class="btn btn-success"></i>&nbsp;SI</a>
     			</div>
     			
-    			<div class="modal-body">
+    			<!--<div class="modal-body">
     				<div class="form-outline mb-4 text-white">
                     	<label style="color:black" for="addmedicationtext" >Medication name: </label>
                     	<input type="text" id="medicinename-to-add" class="input" maxlength="50" placeholder="Medication name" required>
@@ -79,12 +74,15 @@
     			
     			<div class="modal-footer">
     			<button class="btn btn-success" data-bs-dismiss="modal" type="submit">Add reminder</button>
-    			</div>
+    			</div>-->
     			
     			</div>
     		</div>
     	</div>
+	<!--Parte dentro del modal-->
     <!--Parte muestra de medicamento-->
+
+
           <div class="col text-center">
             <h1>Hours for taking medications</h1>
           </div>  
@@ -95,38 +93,30 @@
                  
             </div>
         </div>
-    
-    <!--Parte Tablas-->    
-   <div class="rectangle1">
-    <div class="row me-1">
-    	
-    	<!--Card to generate--> 
-    	<div id="medWarnChangeCard" class="card border border-secondary">
-    		<div class="card-body">
-    			<div class="row" >
-    				<div class="col">
-    					<h4 class="card-tittle">Medicine: </h4>
-    					<p class="card-text" >Name.medicine</p>
-    				</div>
-    				<div class="col">
-    					<h4 class="card-tittle">Time: </h4>
-    					<p class="card-text">00:00 AMPM</p>
-    				</div>
-    				<div class="col align-self-center">
-  								<button type="button" class="btn btn-danger me-5">Delete</button>
-  								<input type="checkbox" class="btn-check me-5" id="btn-medicineCheck" autocomplete="off">
-								<label class="btn btn-outline-success" for="btn-medicineCheck">Consumed</label><br>
-    				</div>
-    			</div>
-    		</div>	
-    	</div>
 
-      <table class="table table-hover">
+		<div class="card text-center bg-success">
+			<div class="card-header">
+			  <ul class="nav nav-pills card-header-pills">
+				<li class="nav-item">
+					<div class="">
+						<button class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#addMedicineModal">Add Medicine</button>
+          </div>
+				</li>
+			  </ul>
+			</div>
+      
+<div class="card-body bg-dark text-white pb-5 ">
+			      <!--Parte Tablas-->    
+   <div class="rectangle1 pb-5">
+    <div class="row me-1">	
+      <table class="table table-hover-white text-white">
         <thead>
           <tr>
             <th>ID</th>
             <th>Nombre del medicamento</th>
             <th>Hora</th>
+			<th>Editar</th>
+			<th>Eliminar</th>
           </tr>
         </thead>
   
@@ -137,21 +127,27 @@
             <td th:text="${contacto.celular}"></td>
   
   
-            <td><a th:href="@{/{id}/editar/(id=${contacto.id})}" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp;Editar</a>
-              <a href="#" onclick="eliminarContacto(this)" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp;Eliminar</a>
-              <form th:action="@{/{id}/eliminar/(id=${contacto.id})}"
-                method="post"></form></td>
+            <td><a th:href="@{/{id}/editar/(id=${contacto.id})}" class="btn btn-warning"><i class="fas fa-edit"></i>&nbsp;Editar</a></td>
+			<td>
+         <a href="#" onclick="eliminarContacto(this)" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp;Eliminar</a>
+         <form th:action="@{/{id}/eliminar/(id=${contacto.id})}" method="post"></form>
+			</td>
           </tr>
         </tbody>
       </table>
-    	
-    	
-    	
-    	
-    </div>
-  </div>
+    	</div>
+		</div>
+</div>
+
   <script src="/public/JS/changeColor.js"></script>
+  <script src="/public/JS/getterTime.js"></script>
   </body>
+  
+  <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+  crossorigin="anonymous"
+  ></script>
   <script>
     function eliminarContacto(elemento){
       var ok = confirm('¿Estas seguro de eliminar al contacto?');
@@ -160,12 +156,7 @@
         elemento.nextElementSibling.submit();
       }zx
     }
- </script>
-  <script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-  crossorigin="anonymous"
-  ></script>
+  </script>
   <script
   src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
   integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"

@@ -1,0 +1,84 @@
+.rectangle1{
+    
+    margin: 2%;
+    overflow: hidden;
+    border-radius: .5rem;
+    padding: 2%;
+    
+}
+
+.col{
+    text-align: center;
+}
+
+.caja{
+    overflow: hidden;
+    display: flex;
+    background-color: white;
+    border-radius: .3rem;
+    border: 1px solid black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.caja>.titulo{
+    padding: 10px;
+    color: #29436e;
+    text-align: start;
+    font-size: x-large;
+    flex: 50%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif ;
+}
+
+.caja>.campo{
+    padding: 10px;
+    color: black;
+    text-align: center;
+    font-size: large;
+}
+
+
+.confirmar{
+    padding: 10px;
+    color: black;
+    text-align: end;
+    font-size: large;
+}
+
+.col-4{
+    padding-left: 4%;
+    margin-top: 10%;
+    text-align: left;
+}
+.boton_personalizado{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: gray;
+    border-radius: 6px;
+    border: 2px solid black;
+  }
+  .boton_personalizado:hover{
+    color: black;
+    background-color: lightgreen;
+  }
+
+  #irlTime {
+    font-family: Verdana, Geneva, Tahoma, sans-serif ;
+    font-size: xx-large;
+    text-align: center;
+  }
+  
+  #medWarnChangeCard{
+	background-color: green;
+}
+
+  * {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+  
